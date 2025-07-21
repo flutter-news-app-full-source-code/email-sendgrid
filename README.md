@@ -50,6 +50,7 @@ void main() async {
   // 3. Use the client to send an email
   try {
     await emailClient.sendTransactionalEmail(
+      senderEmail: 'noreply@yourdomain.com',
       recipientEmail: 'recipient@example.com',
       templateId: 'd-your-template-id',
       templateData: {'name': 'World'},
