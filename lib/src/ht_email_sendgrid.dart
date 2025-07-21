@@ -29,6 +29,7 @@ class HtEmailSendGrid implements HtEmailClient {
 
   @override
   Future<void> sendTransactionalEmail({
+    required String senderEmail,
     required String recipientEmail,
     required String templateId,
     required Map<String, dynamic> templateData,
@@ -47,9 +48,7 @@ class HtEmailSendGrid implements HtEmailClient {
           'dynamic_template_data': templateData,
         },
       ],
-      'from': {
-        'email': 'noreply@example.com', // This should be a configured sender
-      },
+      'from': {'email': senderEmail},
       'template_id': templateId,
     };
 
