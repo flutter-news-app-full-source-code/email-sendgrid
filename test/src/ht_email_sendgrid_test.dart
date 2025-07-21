@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:ht_email_sendgrid/ht_email_sendgrid.dart';
 import 'package:ht_http_client/ht_http_client.dart';
 import 'package:ht_shared/ht_shared.dart';
@@ -12,6 +14,7 @@ void main() {
     late HtHttpClient mockHttpClient;
     late HtEmailSendGrid emailClient;
 
+    const senderEmail = 'sender@example.com';
     const recipientEmail = 'test@example.com';
     const templateId = 'd-12345';
     const templateData = {'name': 'Test User'};
@@ -40,6 +43,7 @@ void main() {
 
         // Act
         await emailClient.sendTransactionalEmail(
+          senderEmail: senderEmail,
           recipientEmail: recipientEmail,
           templateId: templateId,
           templateData: templateData,
@@ -55,7 +59,7 @@ void main() {
 
         final payload = captured.first as Map<String, dynamic>;
         expect(payload['template_id'], templateId);
-        expect(payload['from']['email'], 'noreply@example.com');
+        expect(payload['from']['email'], senderEmail);
         final personalizations =
             payload['personalizations'] as List<Map<String, dynamic>>;
         expect(personalizations.first['to'].first['email'], recipientEmail);
@@ -78,6 +82,7 @@ void main() {
         // Act & Assert
         expect(
           () => emailClient.sendTransactionalEmail(
+            senderEmail: senderEmail,
             recipientEmail: recipientEmail,
             templateId: templateId,
             templateData: templateData,
