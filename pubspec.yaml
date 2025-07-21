@@ -1,15 +1,19 @@
 name: ht_email_sendgrid
-description: ...
-repository: https://github.com/headlines-toolkit/ht-email-client
+description: A concrete implementation of the HtEmailClient interface that uses the SendGrid API to send transactional emails.
+repository: https://github.com/headlines-toolkit/ht-email-sendgrid
 publish_to: none
 
 environment:
   sdk: ^3.8.0
 
 dependencies:
+  dio: ^5.8.0+1
   ht_email_client:
     git:
       url: https://github.com/headlines-toolkit/ht-email-client.git
+  ht_http_client:
+    git:
+        url: https://github.com/headlines-toolkit/ht-http-client.git  
   ht_shared:
     git:
       url: https://github.com/headlines-toolkit/ht-shared.git
