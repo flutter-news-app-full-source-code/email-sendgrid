@@ -1,4 +1,5 @@
-// ignore_for_file: avoid_dynamic_calls, inference_failure_on_function_invocation
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: avoid_dynamic_calls, inference_failure_on_function_invocation,
 
 import 'package:core/core.dart';
 import 'package:email_sendgrid/email_sendgrid.dart';
