@@ -81,6 +81,25 @@ void main() {
           throwsA(isA<HttpException>()),
         );
       });
+
+      test('throws OperationFailedException on unexpected error', () async {
+        // Arrange
+        final exception = Exception('Unexpected error');
+        when(
+          () => mockHttpClient.post<void>(any(), data: any(named: 'data')),
+        ).thenThrow(exception);
+
+        // Act & Assert
+        expect(
+          () => emailClient.sendTransactionalEmail(
+            senderEmail: senderEmail,
+            recipientEmail: recipientEmail,
+            templateId: templateId,
+            templateData: templateData,
+          ),
+          throwsA(isA<OperationFailedException>()),
+        );
+      });
     });
   });
 }
