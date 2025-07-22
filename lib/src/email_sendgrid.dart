@@ -1,28 +1,28 @@
-import 'package:ht_email_client/ht_email_client.dart';
-import 'package:ht_http_client/ht_http_client.dart';
-import 'package:ht_shared/ht_shared.dart';
+// ignore_for_file: lines_longer_than_80_chars
+
+import 'package:core/core.dart';
+import 'package:email_client/email_client.dart' show EmailClient;
+import 'package:http_client/http_client.dart';
 import 'package:logging/logging.dart';
 
-/// {@template ht_email_sendgrid}
+/// {@template email_sendgrid}
 /// A client for sending emails using the SendGrid API.
 ///
-/// This class implements the [HtEmailClient] interface and uses an
-/// [HtHttpClient] to communicate with the SendGrid v3 API.
+/// This class implements the [EmailClient] interface and uses an
+/// [HttpClient] to communicate with the SendGrid v3 API.
 /// {@endtemplate}
-class HtEmailSendGrid implements HtEmailClient {
-  /// {@macro ht_email_sendgrid}
+class EmailSendGrid implements EmailClient {
+  /// {@macro email_sendgrid}
   ///
-  /// Requires a pre-configured [HtHttpClient] instance that includes the
+  /// Requires a pre-configured [HttpClient] instance that includes the
   /// SendGrid API base URL ('https://api.sendgrid.com/v3') and an
   /// authentication interceptor to provide the SendGrid API key as a
   /// Bearer token.
-  const HtEmailSendGrid({
-    required HtHttpClient httpClient,
-    required Logger log,
-  }) : _httpClient = httpClient,
-       _log = log;
+  const EmailSendGrid({required HttpClient httpClient, required Logger log})
+    : _httpClient = httpClient,
+      _log = log;
 
-  final HtHttpClient _httpClient;
+  final HttpClient _httpClient;
   final Logger _log;
 
   static const String _sendPath = '/mail/send';
@@ -53,13 +53,13 @@ class HtEmailSendGrid implements HtEmailClient {
     };
 
     try {
-      // The HtHttpClient's post method will handle the request and its
-      // ErrorInterceptor will map DioExceptions to HtHttpExceptions.
+      // The HttpClient's post method will handle the request and its
+      // ErrorInterceptor will map DioExceptions to HttpExceptions.
       await _httpClient.post<void>(_sendPath, data: payload);
       _log.info(
         'Successfully requested email send to $recipientEmail with template $templateId',
       );
-    } on HtHttpException {
+    } on HttpException {
       // Re-throw the already mapped exception for the repository/service
       // layer to handle.
       rethrow;
@@ -70,9 +70,7 @@ class HtEmailSendGrid implements HtEmailClient {
         e,
         s,
       );
-      throw OperationFailedException(
-        'An unexpected error occurred: $e',
-      );
+      throw OperationFailedException('An unexpected error occurred: $e');
     }
   }
 }

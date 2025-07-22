@@ -1,6 +1,6 @@
-name: ht_email_sendgrid
-description: A concrete implementation of the HtEmailClient interface that uses the SendGrid API to send transactional emails.
-repository: https://github.com/headlines-toolkit/ht-email-sendgrid
+name: email_sendgrid
+description: A concrete implementation of the EmailClient interface that uses the SendGrid API to send transactional emails.
+repository: https://github.com/flutter-news-app-full-source-code/email-sendgrid
 publish_to: none
 
 environment:
@@ -8,15 +8,15 @@ environment:
 
 dependencies:
   dio: ^5.8.0+1
-  ht_email_client:
+  email_client:
     git:
-      url: https://github.com/headlines-toolkit/ht-email-client.git
-  ht_http_client:
+      url: https://github.com/flutter-news-app-full-source-code/email-client.git
+  http_client:
     git:
-        url: https://github.com/headlines-toolkit/ht-http-client.git  
-  ht_shared:
+        url: https://github.com/flutter-news-app-full-source-code/http-client.git  
+  core:
     git:
-      url: https://github.com/headlines-toolkit/ht-shared.git
+      url: https://github.com/flutter-news-app-full-source-code/core.git
   logging: ^1.3.0
 
 dev_dependencies:

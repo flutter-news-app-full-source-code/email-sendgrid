@@ -1,18 +1,18 @@
-// ignore_for_file: avoid_dynamic_calls
+// ignore_for_file: avoid_dynamic_calls, inference_failure_on_function_invocation
 
-import 'package:ht_email_sendgrid/ht_email_sendgrid.dart';
-import 'package:ht_http_client/ht_http_client.dart';
-import 'package:ht_shared/ht_shared.dart';
+import 'package:core/core.dart';
+import 'package:email_sendgrid/email_sendgrid.dart';
+import 'package:http_client/http_client.dart';
 import 'package:logging/logging.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-class MockHtHttpClient extends Mock implements HtHttpClient {}
+class MockHttpClient extends Mock implements HttpClient {}
 
 void main() {
-  group('HtEmailSendGrid', () {
-    late HtHttpClient mockHttpClient;
-    late HtEmailSendGrid emailClient;
+  group('EmailSendGrid', () {
+    late HttpClient mockHttpClient;
+    late EmailSendGrid emailClient;
 
     const senderEmail = 'sender@example.com';
     const recipientEmail = 'test@example.com';
@@ -20,8 +20,8 @@ void main() {
     const templateData = {'name': 'Test User'};
 
     setUp(() {
-      mockHttpClient = MockHtHttpClient();
-      emailClient = HtEmailSendGrid(
+      mockHttpClient = MockHttpClient();
+      emailClient = EmailSendGrid(
         httpClient: mockHttpClient,
         log: Logger('TestLogger'),
       );
@@ -35,10 +35,7 @@ void main() {
       test('calls http client post with correct payload on success', () async {
         // Arrange
         when(
-          () => mockHttpClient.post<void>(
-            any(),
-            data: any(named: 'data'),
-          ),
+          () => mockHttpClient.post<void>(any(), data: any(named: 'data')),
         ).thenAnswer((_) async => Future.value());
 
         // Act
@@ -63,20 +60,14 @@ void main() {
         final personalizations =
             payload['personalizations'] as List<Map<String, dynamic>>;
         expect(personalizations.first['to'].first['email'], recipientEmail);
-        expect(
-          personalizations.first['dynamic_template_data'],
-          templateData,
-        );
+        expect(personalizations.first['dynamic_template_data'], templateData);
       });
 
-      test('propagates HtHttpException from http client', () async {
+      test('propagates HttpException from http client', () async {
         // Arrange
-        final exception = ServerException('Failed');
+        const exception = ServerException('Failed');
         when(
-          () => mockHttpClient.post<void>(
-            any(),
-            data: any(named: 'data'),
-          ),
+          () => mockHttpClient.post<void>(any(), data: any(named: 'data')),
         ).thenThrow(exception);
 
         // Act & Assert
@@ -87,7 +78,7 @@ void main() {
             templateId: templateId,
             templateData: templateData,
           ),
-          throwsA(isA<HtHttpException>()),
+          throwsA(isA<HttpException>()),
         );
       });
     });
