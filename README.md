@@ -52,6 +52,7 @@ void main() async {
     await emailClient.sendTransactionalEmail(
       senderEmail: 'noreply@yourdomain.com',
       recipientEmail: 'recipient@example.com',
+      subject: 'Your Subject Here',
       templateId: 'd-your-template-id',
       templateData: {'name': 'World'},
     );
