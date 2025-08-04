@@ -17,6 +17,7 @@ void main() {
 
     const senderEmail = 'sender@example.com';
     const recipientEmail = 'test@example.com';
+    const subject = 'Test Subject';
     const templateId = 'd-12345';
     const templateData = {'name': 'Test User'};
 
@@ -43,6 +44,7 @@ void main() {
         await emailClient.sendTransactionalEmail(
           senderEmail: senderEmail,
           recipientEmail: recipientEmail,
+          subject: subject,
           templateId: templateId,
           templateData: templateData,
         );
@@ -61,6 +63,7 @@ void main() {
         final personalizations =
             payload['personalizations'] as List<Map<String, dynamic>>;
         expect(personalizations.first['to'].first['email'], recipientEmail);
+        expect(personalizations.first['subject'], subject);
         expect(personalizations.first['dynamic_template_data'], templateData);
       });
 
@@ -76,6 +79,7 @@ void main() {
           () => emailClient.sendTransactionalEmail(
             senderEmail: senderEmail,
             recipientEmail: recipientEmail,
+            subject: subject,
             templateId: templateId,
             templateData: templateData,
           ),
@@ -95,6 +99,7 @@ void main() {
           () => emailClient.sendTransactionalEmail(
             senderEmail: senderEmail,
             recipientEmail: recipientEmail,
+            subject: subject,
             templateId: templateId,
             templateData: templateData,
           ),
