@@ -32,6 +32,7 @@ class EmailSendGrid implements EmailClient {
   Future<void> sendTransactionalEmail({
     required String senderEmail,
     required String recipientEmail,
+    required String subject,
     required String templateId,
     required Map<String, dynamic> templateData,
   }) async {
@@ -46,6 +47,7 @@ class EmailSendGrid implements EmailClient {
           'to': [
             {'email': recipientEmail},
           ],
+          'subject': subject,
           'dynamic_template_data': templateData,
         },
       ],
