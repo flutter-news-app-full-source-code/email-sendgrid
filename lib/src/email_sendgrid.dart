@@ -50,7 +50,6 @@ class EmailSendGrid implements EmailClient {
         },
       ],
       'from': {'email': senderEmail},
-      'subject': templateData['otp_code'],
       'template_id': templateId,
     };
 
