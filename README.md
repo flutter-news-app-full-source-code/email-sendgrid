@@ -10,7 +10,7 @@
   <a href="https://github.com/flutter-news-app-full-source-code"><img src="https://img.shields.io/badge/MAIN_PROJECT-BROWSE-purple?style=for-the-badge" alt="Main Project: Browse"></a>
 </p>
 
-This `email_sendgrid` package provides a concrete implementation of the `EmailClient` interface within the [**Flutter News App Full Source Code Toolkit**](https://github.com/flutter-news-app-full-source-code). It leverages the SendGrid v3 API to send transactional emails, offering a robust and reliable solution for email dispatch. Designed to be used with the `email_repository` and `http_client` packages, it utilizes the standardized `HttpClient` for making HTTP requests and handling errors, ensuring consistent behavior and robust error management. This package is crucial for backend services (like a Dart Frog API) that require integration with a powerful email service provider.
+This `email_sendgrid` package provides a concrete implementation of the `EmailClient` interface within the [**Flutter News App Full Source Code Toolkit**](https://github.com/flutter-news-app-full-source-code). It leverages the SendGrid v3 API to send transactional emails, offering a robust and reliable solution for email dispatch. Designed to be used with the `email_repository` and `http_client` packages, it utilizes the standardized `HttpClient` for making HTTP requests and handling errors, ensuring consistent behavior and robust error management. This package is crucial for backend services that require integration with a powerful email service provider.
 
 ## ⭐ Feature Showcase: Reliable SendGrid Email Integration
 
