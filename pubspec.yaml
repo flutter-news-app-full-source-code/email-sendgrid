@@ -2,6 +2,7 @@ name: email_sendgrid
 description: A concrete implementation of the EmailClient interface that uses the SendGrid API to send transactional emails.
 repository: https://github.com/flutter-news-app-full-source-code/email-sendgrid
 publish_to: none
+version: 1.0.1
 
 environment:
   sdk: ^3.9.0
@@ -10,12 +11,12 @@ dependencies:
   core:
     git:
       url: https://github.com/flutter-news-app-full-source-code/core.git
-      ref: v1.2.0
+      ref: v1.3.1
   dio: ^5.8.0+1
   email_client:
     git:
       url: https://github.com/flutter-news-app-full-source-code/email-client.git
-      ref: v1.0.0
+      ref: v1.0.1
   http_client:
     git:
       url: https://github.com/flutter-news-app-full-source-code/http-client.git  
